@@ -1,13 +1,10 @@
 'use strict';
 
-const artists = JSON.parse(document.querySelector('#directory-data').textContent);
+const { artists, results: findArtists, artistPath, pageSize } = artistDirectory;
 const $ = id => document.getElementById(id);
 const slugByName = new Map(artists.map(artist => [artist.name, artist.slug]));
 const url = new URL(location.href);
 const filters = [$('query'), $('genre'), $('day'), $('sort')];
-const compare = new Intl.Collator('en', { sensitivity: 'base', numeric: true }).compare;
-const searchKey = value => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase();
-const pageSize = 18;
 let page = Number(url.searchParams.get('page')) || 1;
 
 function redirectLegacyLink() {
@@ -30,18 +27,7 @@ function addCell(row, value, className) {
 }
 
 function render() {
-  const [query, genre, day, sort] = filters.map(filter => filter.value);
-  const term = searchKey(query.trim());
-  const results = artists.filter(artist =>
-    (!term || searchKey(artist.name + ' ' + artist.genre).includes(term)) &&
-    (!genre || artist.genre === genre) &&
-    (!day || artist.day === day)
-  );
-  if (sort !== 'poster') {
-    const field = sort.startsWith('genre') ? 'genre' : 'name';
-    const direction = sort.endsWith('-desc') ? -1 : 1;
-    results.sort((a, b) => direction * compare(a[field], b[field]) || compare(a.name, b.name));
-  }
+  const results = findArtists(Object.fromEntries(filters.map(filter => [filter.id, filter.value])));
   const pages = Math.max(1, Math.ceil(results.length / pageSize));
   page = Math.max(1, Math.min(Math.trunc(page), pages));
   $('matches').textContent = results.length + ' of ' + artists.length + ' artists';
@@ -49,7 +35,7 @@ function render() {
   $('prev').disabled = page === 1;
   $('next').disabled = page === pages;
 
-  const context = new URLSearchParams({ from: directoryState().toString() });
+  const context = directoryState();
   const body = $('artists-body');
   body.replaceChildren();
   for (const artist of results.slice((page - 1) * pageSize, page * pageSize)) {
@@ -57,7 +43,7 @@ function render() {
     const cell = row.insertCell();
     const link = document.createElement('a');
     link.id = 'artist-row-' + artist.slug;
-    link.href = 'artists/' + artist.slug + '/index.html?' + context;
+    link.href = artistPath(artist.slug, context);
     link.textContent = artist.name;
     const billing = document.createElement('span');
     billing.className = 'row-billing';

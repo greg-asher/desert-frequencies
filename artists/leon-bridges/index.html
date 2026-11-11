@@ -22,7 +22,13 @@
 </nav>
 <main class="shell">
 
-<a class="back" id="all-artists" href="../../index.html" data-artist-slug="leon-bridges">← All artists</a>
+<nav class="artist-nav" aria-label="Artist navigation">
+  <a id="all-artists" href="../../index.html" data-artist-slug="leon-bridges">← All artists</a>
+  <div class="artist-neighbors">
+    <a id="previous-artist" rel="prev" hidden>← Previous artist</a>
+    <a id="next-artist" rel="next" hidden>Next artist →</a>
+  </div>
+</nav>
 <article>
   <header class="artist-top">
     <div>
@@ -56,6 +62,7 @@
     <a href="https://coachella.com/faq" target="_blank" rel="noopener noreferrer">Festival dates and FAQs ↗</a>
   </div>
 </footer>
-<script src="../../artist-navigation.js"></script>
+<script src="../../artist-directory.js"></script>
+<script src="../../artist-navigation.js?v=2"></script>
 </body>
 </html>
