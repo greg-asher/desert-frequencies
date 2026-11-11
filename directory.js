@@ -49,13 +49,15 @@ function render() {
   $('prev').disabled = page === 1;
   $('next').disabled = page === pages;
 
+  const context = new URLSearchParams({ from: directoryState().toString() });
   const body = $('artists-body');
   body.replaceChildren();
   for (const artist of results.slice((page - 1) * pageSize, page * pageSize)) {
     const row = body.insertRow();
     const cell = row.insertCell();
     const link = document.createElement('a');
-    link.href = 'artists/' + artist.slug + '/index.html';
+    link.id = 'artist-row-' + artist.slug;
+    link.href = 'artists/' + artist.slug + '/index.html?' + context;
     link.textContent = artist.name;
     const billing = document.createElement('span');
     billing.className = 'row-billing';
@@ -71,18 +73,26 @@ function render() {
   }
 }
 
-function saveDirectoryState() {
-  const current = new URL(location.href);
+function directoryState() {
+  const params = new URLSearchParams();
   for (const filter of filters) {
     if (filter.value && !(filter.id === 'sort' && filter.value === 'name')) {
-      current.searchParams.set(filter.id, filter.value);
-    } else {
-      current.searchParams.delete(filter.id);
+      params.set(filter.id, filter.value);
     }
   }
-  if (page > 1) current.searchParams.set('page', page);
-  else current.searchParams.delete('page');
-  if (current.protocol !== 'file:') history.replaceState(null, '', current);
+  if (page > 1) params.set('page', page);
+  return params;
+}
+
+function saveDirectoryState() {
+  const current = new URL(location.href);
+  if (current.protocol === 'file:') return;
+  for (const key of [...filters.map(filter => filter.id), 'page']) {
+    current.searchParams.delete(key);
+  }
+  for (const [key, value] of directoryState()) current.searchParams.set(key, value);
+  if (current.hash.startsWith('#artist-row-')) current.hash = '';
+  history.replaceState(null, '', current);
 }
 
 for (const filter of filters) {
@@ -115,3 +125,11 @@ for (const [id, delta] of [['prev', -1], ['next', 1]]) {
 window.addEventListener('hashchange', redirectLegacyLink);
 redirectLegacyLink();
 render();
+
+if (location.hash.startsWith('#artist-row-')) {
+  const link = $(location.hash.slice(1));
+  if (link) {
+    link.focus({ preventScroll: true });
+    link.scrollIntoView({ block: 'center' });
+  }
+}
