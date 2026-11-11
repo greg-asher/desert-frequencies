@@ -30,12 +30,15 @@ if (from !== null && index !== -1) {
 }
 
 if (index !== -1) {
-  for (const [id, position] of [['previous-artist', index - 1], ['next-artist', index + 1]]) {
+  for (const [step, position] of [['previous', index - 1], ['next', index + 1]]) {
     const artist = results[position];
     if (!artist) continue;
-    const link = document.getElementById(id);
-    link.href = '../../' + artistDirectory.artistPath(artist.slug, stateFor(position));
-    link.title = artist.name;
-    link.hidden = false;
+    const href = '../../' + artistDirectory.artistPath(artist.slug, stateFor(position));
+    for (const link of document.querySelectorAll('[data-artist-step="' + step + '"]')) {
+      link.href = href;
+      link.title = artist.name;
+      link.hidden = false;
+      link.closest('nav').hidden = false;
+    }
   }
 }

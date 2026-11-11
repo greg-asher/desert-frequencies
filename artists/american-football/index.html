@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="American Football formed in Urbana, Illinois. Its self-titled 1999 debut became an emo touchstone through chiming guitar parts, unusual meters and restrained singing.">
 <title>American Football · Desert Frequencies</title>
-<link rel="stylesheet" href="../../site.css">
+<link rel="stylesheet" href="../../site.css?v=2">
 </head>
 <body>
 <header class="site-header">
@@ -25,9 +25,9 @@
 <nav class="artist-nav" aria-label="Artist navigation">
   <a id="all-artists" href="../../index.html" data-artist-slug="american-football">← All artists</a>
   <div class="artist-neighbors">
-    <a id="previous-artist" rel="prev" hidden>← Previous artist</a>
-    <a id="next-artist" rel="next" hidden>Next artist →</a>
-  </div>
+  <a data-artist-step="previous" rel="prev" hidden>← Previous artist</a>
+  <a data-artist-step="next" rel="next" hidden>Next artist →</a>
+</div>
 </nav>
 <article>
   <header class="artist-top">
@@ -54,6 +54,12 @@
   </div>
   <section class="report-section"><h2>Listening notes</h2><h3>The house on LP1</h3><p>The 1999 debut emerged from the Urbana basement and DIY scene. For its 25th anniversary, the label commissioned a covers album, including Iron &amp; Wine’s take on “Never Meant.”</p></section>
 </article>
+<nav class="artist-nav artist-nav-bottom" aria-label="Continue browsing artists" hidden>
+  <div class="artist-neighbors">
+  <a data-artist-step="previous" rel="prev" hidden>← Previous artist</a>
+  <a data-artist-step="next" rel="next" hidden>Next artist →</a>
+</div>
+</nav>
 
 </main>
 <footer class="foot">
@@ -63,6 +69,6 @@
   </div>
 </footer>
 <script src="../../artist-directory.js"></script>
-<script src="../../artist-navigation.js?v=2"></script>
+<script src="../../artist-navigation.js?v=3"></script>
 </body>
 </html>

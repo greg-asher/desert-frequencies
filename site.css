@@ -68,6 +68,8 @@ summary { cursor: pointer; font-weight: 650; }
 details > div { padding: .8rem 0 .25rem; max-width: 53rem; }
 .poster { margin: .8rem 0 0; max-width: 29rem; }
 .artist-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin-bottom: .95rem; font-size: .9rem; }
+.artist-nav-bottom { justify-content: flex-end; margin: 2rem 0 0; padding-top: .9rem; border-top: 1px solid var(--line); }
+.artist-nav-bottom[hidden] { display: none; }
 .artist-neighbors { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
 .artist-top { display: grid; grid-template-columns: 1.65fr 1fr; align-items: start; gap: clamp(1rem, 4vw, 3rem); margin-bottom: 1.6rem; }
 .artist-top h1 { margin: .18em 0 .32em; }

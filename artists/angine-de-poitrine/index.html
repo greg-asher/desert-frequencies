@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Angine de Poitrine builds instrumental math rock around microtonal guitar and tightly coordinated drumming. The Quebec duo brings a masked stage show to its off-kilter riffs.">
 <title>Angine de Poitrine · Desert Frequencies</title>
-<link rel="stylesheet" href="../../site.css">
+<link rel="stylesheet" href="../../site.css?v=2">
 </head>
 <body>
 <header class="site-header">
@@ -25,9 +25,9 @@
 <nav class="artist-nav" aria-label="Artist navigation">
   <a id="all-artists" href="../../index.html" data-artist-slug="angine-de-poitrine">← All artists</a>
   <div class="artist-neighbors">
-    <a id="previous-artist" rel="prev" hidden>← Previous artist</a>
-    <a id="next-artist" rel="next" hidden>Next artist →</a>
-  </div>
+  <a data-artist-step="previous" rel="prev" hidden>← Previous artist</a>
+  <a data-artist-step="next" rel="next" hidden>Next artist →</a>
+</div>
 </nav>
 <article>
   <header class="artist-top">
@@ -54,6 +54,12 @@
   </div>
   <section class="report-section"><h2>Listening notes</h2><h3>Microtonal guitars and drums</h3><p>KEXP recorded Khn and Klek de Poitrine at Trans Musicales in Rennes. Three songs from that session also appear in the playlist: “Sarniezz,” “Fabienk,” and “Sherpa.”</p></section>
 </article>
+<nav class="artist-nav artist-nav-bottom" aria-label="Continue browsing artists" hidden>
+  <div class="artist-neighbors">
+  <a data-artist-step="previous" rel="prev" hidden>← Previous artist</a>
+  <a data-artist-step="next" rel="next" hidden>Next artist →</a>
+</div>
+</nav>
 
 </main>
 <footer class="foot">
@@ -63,6 +69,6 @@
   </div>
 </footer>
 <script src="../../artist-directory.js"></script>
-<script src="../../artist-navigation.js?v=2"></script>
+<script src="../../artist-navigation.js?v=3"></script>
 </body>
 </html>
