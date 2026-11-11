@@ -77,7 +77,7 @@ details > div { padding: .8rem 0 .25rem; max-width: 53rem; }
 .artist-top p:last-child { margin-bottom: 0; }
 .eyebrow, .note, .credit, .foot { color: var(--muted); }
 .artist-visual { margin: 0; }
-.artist-visual img { width: 100%; max-height: 19rem; object-fit: contain; background: #e9dfcd; border-radius: 6px; }
+.artist-visual img { width: auto; height: auto; max-height: 22rem; border-radius: 6px; }
 figcaption { font-size: .77rem; padding-top: .38rem; color: var(--muted); }
 .artist-body { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1rem, 4vw, 3rem); align-items: start; }
 .artist-body section { border-top: 1px solid var(--line); padding-top: 1rem; }
